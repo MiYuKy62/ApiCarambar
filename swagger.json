@@ -1,0 +1,137 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API de Blagues",
+      "description": "API pour gérer les blagues.",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:3000/api/v1",
+        "description": "Serveur local"
+      }
+    ],
+    "paths": {
+      "/blagues": {
+        "get": {
+          "summary": "Récupère toutes les blagues",
+          "responses": {
+            "200": {
+              "description": "Liste de blagues",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Blague"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Crée une nouvelle blague",
+          "requestBody": {
+            "description": "Blague à créer",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Blague"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Blague créée",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Blague"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/blagues/random": {
+        "get": {
+          "summary": "Récupère une blague aléatoire",
+          "responses": {
+            "200": {
+              "description": "Blague aléatoire",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Blague"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Aucune blague trouvée"
+            }
+          }
+        }
+      },
+      "/blagues/{id}": {
+        "get": {
+          "summary": "Récupère une blague par ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              },
+              "description": "ID de la blague"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Blague trouvée",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Blague"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "ID invalide"
+            },
+            "404": {
+              "description": "Blague non trouvée"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Blague": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 1
+            },
+            "blague": {
+              "type": "string",
+              "example": "Pourquoi les plongeurs plongent-ils toujours en arrière et jamais en avant?"
+            },
+            "reponse": {
+              "type": "string",
+              "example": "Parce que sinon ils tombent dans le bateau."
+            }
+          }
+        }
+      }
+    }
+  }

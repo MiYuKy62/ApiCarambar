@@ -7,7 +7,7 @@ router.get('/', (req,res)=> {
     res.status(200).json({sucess: 'RACINE API'})
 });
 
-router.get('/blague/random', controllerBlague.random);
+router.get('/blagues/random', controllerBlague.random);
 
 router.get('/blagues', controllerBlague.findAll);
 
